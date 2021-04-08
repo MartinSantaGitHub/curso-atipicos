@@ -9,5 +9,5 @@ std1=factor*sd(x)
 std2=factor*sd(xo)
   
 #MAD
-mad1=mad(x,     constant = 1) #if the distribution is Normal let the default option which is  constant = 1.4826 (same as not putting any constant option). 
-mad2=mad(xo,     constant = 1) 
+mad1=mad(x,constant = 1) #if the distribution is Normal let the default option which is  constant = 1.4826 (same as not putting any constant option). 
+mad2=mad(xo,constant = 1) 

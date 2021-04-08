@@ -1,9 +1,9 @@
 #-----------------------------------------------------------------------------
-# Datos multivariantes con at韕icos
+# Datos multivariantes con at?picos
 
 library(mvtnorm)
-install.packages("pcaPP")
 library(pcaPP)
+library(rospca)
 
 x <- rbind(rmvnorm(200, rep(0, 6), diag(c(5, rep(1,5)))),
            rmvnorm( 15, c(0, rep(20, 5)), diag(rep(1, 6))))
@@ -14,14 +14,13 @@ pc1 <- PCAproj(x, 6)
 # Biplot:
 biplot(pc1)
 
-# Otra funci髇 objetivo y los 2 primeros PC's
+# Otra funci?n objetivo y los 2 primeros PC's
 pc2 <- PCAproj(x, 3, "qn", "sphere")
 biplot(pc2)
 
 #PCAgrid
 pc3 <- PCAgrid(x, k=6)
 biplot(pc3)
-
 
 #--------------------------------------------------------------
 set.seed(0)
@@ -39,10 +38,10 @@ biplot (pcg, main = "PCAgrid")
 
 #----------------------------------------------
 # Sparse PCA
-#Necesitamos un par醡etro lambda que mide la fuerza de la restricci髇 de dispersi髇 
-#(solo para sPCAgrid). Un valor 鷑ico para todos los componentes, o un vector de 
-#longitud k con diferentes valores para cada componente. La funci髇 opt.TPO  
-#calcula una sugerencia para el par醡etro lambda.
+#Necesitamos un par?metro lambda que mide la fuerza de la restricci贸n de dispersi贸n 
+#(solo para sPCAgrid). Un valor 煤nico para todos los componentes, o un vector de 
+#longitud k con diferentes valores para cada componente. La funci贸n opt.TPO  
+#calcula una sugerencia para el par谩metro lambda.
 
 ## Calculando el lambda con opt.TPO 
 set.seed(0)
@@ -52,7 +51,7 @@ maxiter <- 25 ## numero maximo de iteraciones
 method <- "sd" ## estimador clasico
 
 ## Criterio TPO 
-oTPO <- opt.TPO (x, k.max = k.max, method = method, maxiter = maxiter)
+oTPO <- opt.TPO(x, k.max = k.max, method = method, maxiter = maxiter)
 oTPO$pc ## el modelo seleccionado por opt.TPO
 oTPO$pc$load ## Y los sparse loadings
 
@@ -77,18 +76,15 @@ par (mfrow = 1:2)
 biplot (pc, main = "non-sparse PCs")
 biplot (spc, main = "sparse PCs")
 
-
-
 #---------------------------------------------------------------------
 
-install.packages("rospca")
-library(rospca)
-
 #Generar sparse data con outliers usando dataGen
-#m: n鷐ero de datasets
-#n: n鷐ero de observaciones
-#p: n鷐ero de variables
-#eps: proporci髇 de contaminaci髇 (entre 0 y 0.5)
+#m: n煤mero de datasets
+#n: n煤mero de observaciones
+#p: n煤mero de variables
+#eps: proporci贸n de contaminaci贸n (entre 0 y 0.5)
+
+par(mfrow = 1:1)
 
 X_all <- dataGen(m=1, n=100, p=10, eps=0.2)
 X <- X_all$data[[1]]
@@ -99,20 +95,20 @@ resRS <- rospca(X, k=2, lambda=0.4, stand=TRUE)
 diagPlot(resRS)
 
 #Outliers by the method robpca
-out=which(resR$flag.all== FALSE)
+out1=which(resR$flag.all== FALSE)
+
 #Real outliers
 realout=X_all$ind
-cat("Outliers by the method robpca:", sort(unname(out)))
+cat("Outliers by the method robpca:", sort(unname(out1)))
 cat("Real Outliers", sort(realout[[1]]))
 
 #Outliers by the method rospca
-out=which(resRS$flag.all== FALSE)
-cat("Outliers by the method rospca:", sort(unname(out)))
+out2=which(resRS$flag.all== FALSE)
+cat("Outliers by the method rospca:", sort(unname(out2)))
 cat("Real Outliers", sort(realout[[1]]))
 
-cat("Outliers by the method robpca:", sort(unname(out)))
-cat("Outliers by the method rospca:", sort(unname(out)))
-
+cat("Outliers by the method robpca:", sort(unname(out1)))
+cat("Outliers by the method rospca:", sort(unname(out2)))
 
 resR$loadings
 resRS$loadings

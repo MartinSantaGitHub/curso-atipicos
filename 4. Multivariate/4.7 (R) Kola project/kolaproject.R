@@ -1,6 +1,6 @@
 ############   Install and load the package mvoutlier ############   
-install.packages("mvoutlier")
 library(mvoutlier)
+
 #Load the data
 data(humus)
 str(humus)
@@ -51,9 +51,3 @@ uni.plot(x,symb=TRUE)
 indexes=1:617
 out=indexes[m$outliers]
 out
-
-
-
-
-
-

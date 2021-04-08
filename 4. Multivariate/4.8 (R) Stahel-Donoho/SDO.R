@@ -1,8 +1,8 @@
 #Stahel-Donoho
 #Computes the Stahel-Donoho outlyingness (SDO) of p-dimensional points z relative to a p-dimensional dataset X
-install.packages("mrfDepth")
 library(mrfDepth)
 library(robustbase)
+library(rrcov)
 
 # Compute the outlyingness of a simple two-dimensional dataset.
 # Outliers are plotted in red.
@@ -11,9 +11,8 @@ Result=outlyingness(x = BivData)
 IndOutliers=which(!Result$flagX) #flagX=TRUE if the obs is not outlier, FALSE if it is outlier
 plot(BivData)
 points(BivData[IndOutliers,], col = "red")
+
 #Compute a robust estimate of location and scale using the Stahel-Donoho projection based estimator
-install.packages("rrcov")
-library(rrcov)
 CovSde(BivData)
 
 #Simulated example 
@@ -23,8 +22,3 @@ Result=outlyingness(x = BivData)
 IndOutliers=which(!Result$flagX) #flagX=TRUE if the obs is not outlier, FALSE if it is outlier
 plot(BivData)
 points(BivData[IndOutliers,], col = "red")
-
-
-
-
-
