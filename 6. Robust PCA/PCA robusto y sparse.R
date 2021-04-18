@@ -1,5 +1,5 @@
 #-----------------------------------------------------------------------------
-# Datos multivariantes con at?picos
+# Datos multivariantes con atípicos
 
 library(mvtnorm)
 library(pcaPP)
@@ -14,7 +14,7 @@ pc1 <- PCAproj(x, 6)
 # Biplot:
 biplot(pc1)
 
-# Otra funci?n objetivo y los 2 primeros PC's
+# Otra función objetivo y los 2 primeros PC's
 pc2 <- PCAproj(x, 3, "qn", "sphere")
 biplot(pc2)
 
@@ -38,7 +38,7 @@ biplot (pcg, main = "PCAgrid")
 
 #----------------------------------------------
 # Sparse PCA
-#Necesitamos un par?metro lambda que mide la fuerza de la restricción de dispersión 
+#Necesitamos un parámetro lambda que mide la fuerza de la restricción de dispersión 
 #(solo para sPCAgrid). Un valor único para todos los componentes, o un vector de 
 #longitud k con diferentes valores para cada componente. La función opt.TPO  
 #calcula una sugerencia para el parámetro lambda.
